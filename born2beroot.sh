@@ -57,3 +57,48 @@ crontab -l | { cat; echo "*/10 * * * * bash /home/abouabra/monitoring.sh"; } | c
 #<-----configure Monitoring.sh ------>
 curl https://raw.githubusercontent.com/abouabra/Born2BeRoot/master/monitoring.sh > monitoring.sh
 chmod +x monitoring.sh
+#<---------------------------->
+
+#<-----configure mariadb ------>
+mysql_secure_installation <<EOF
+
+y
+1598753246
+1598753246
+y
+y
+y
+y
+EOF
+
+mariadb -e "CREATE DATABASE wordpress;"
+mariadb -e "GRANT ALL ON wordpress.* TO 'abouabra'@'localhost' IDENTIFIED BY '1598753246' WITH GRANT OPTION;"
+mariadb -e "FLUSH PRIVILEGES"
+mariadb -e "SHOW DATABASES;"
+
+#<---------------------------->
+#<-----configure WordPress ------>
+
+cd /var/www/html/
+rm -rf *
+wget http://wordpress.org/latest.tar.gz
+tar -xzvf /var/www/html/latest.tar.gz
+mv wordpress/* .
+rm -rf latest.tar.gz wordpress
+cp wp-config-sample.php wp-config.php
+
+sed -i 's/database_name_here/wordpress/' wp-config.php
+sed -i 's/username_here/abouabra/' wp-config.php
+sed -i 's/password_here/1598753246/' wp-config.php
+
+#<---------------------------->
+#<-----configure Lighttpd ------>
+
+lighty-enable-mod fastcgi
+lighty-enable-mod fastcgi-php
+service lighttpd force-reload
+#<---------------------------->
+#<-----configure FTP ------>
+sed -i 's/#write_enable=YES/write_enable=YES/' /etc/vsftpd.conf
+chmod -R 777 *
+#<---------------------------->
