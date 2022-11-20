@@ -1,4 +1,4 @@
-LVM_COUNT=$(cat /etc/fstab | grep "LVMGROUP" | wc -l)
+LVM_COUNT=$(cat /etc/fstab | grep "LVMGroup" | wc -l)
 LVM_ANSWER=$(if [ $LVM_COUNT -eq 0 ]; then echo "no";else echo "yes";fi)
 wall "
 	#Architecture	: $(uname -a)
