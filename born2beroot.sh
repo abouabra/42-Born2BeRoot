@@ -6,15 +6,15 @@ addgroup user42
 adduser abouabra sudo
 adduser abouabra user42
 #sudo config
-touch /etc/sudoers.d/sudo.log
-
+touch /etc/sudoers.d/sudo
+mkdir /var/log/sudo/
 echo 'Defaults	passwd_tries=3
 Defaults	badpass_message="Bad Msg Enter Valid Passwd"
 Defaults	logfile="/var/log/sudo/log"
 Defaults	log_input,log_output
-Defaults	iolog_dir="/var/log/sudo"
+Defaults	iolog_dir="/var/log/sudo/"
 Defaults	requiretty
-Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"' > /etc/sudoers.d/sudo.log
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"' > /etc/sudoers.d/sudo
 #<---------------------------->
 
 #<-----configure ssh ------>
@@ -55,7 +55,7 @@ crontab -l | { cat; echo "*/10 * * * * bash /home/abouabra/monitoring.sh"; } | c
 #<---------------------------->
 
 #<-----configure Monitoring.sh ------>
-curl https://raw.githubusercontent.com/abouabra/Born2BeRoot/master/monitoring.sh > monitoring.sh
+curl https://raw.githubusercontent.com/abouabra/Born2BeRoot/master/monitoring.sh > /home/abouabra/monitoring.sh
 chmod +x monitoring.sh
 #<---------------------------->
 
