@@ -1,5 +1,5 @@
 sudo su -
-apt -y install sudo openssh-server ufw libpam-pwquality curl lighttpd mariadb-server php-cgi php-mysql wget vsftpd ftp
+apt -y install sudo openssh-server ufw libpam-pwquality curl lighttpd mariadb-server php-cgi php-mysql wget vsftpd ftp bc
 #<-----configure sudo ------>
 #add user to sudo
 addgroup user42
@@ -101,4 +101,12 @@ service lighttpd force-reload
 #<-----configure FTP ------>
 sed -i 's/#write_enable=YES/write_enable=YES/' /etc/vsftpd.conf
 chmod -R 777 *
+#<---------------------------->
+
+#<-----configure App Armor ------>
+apt install apparmor-easyprof apparmor-notify apparmor-utils certspotter
+sudo mkdir -p /etc/default/grub.d
+echo 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT apparmor=1 security=apparmor"' > /etc/default/grub.d/apparmor.cfg
+update-grub
+reboot
 #<---------------------------->
