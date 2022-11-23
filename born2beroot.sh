@@ -56,7 +56,7 @@ crontab -l | { cat; echo "*/10 * * * * bash /home/abouabra/monitoring.sh"; } | c
 
 #<-----configure Monitoring.sh ------>
 curl https://raw.githubusercontent.com/abouabra/Born2BeRoot/master/monitoring.sh > /home/abouabra/monitoring.sh
-chmod +x monitoring.sh
+chmod +x /home/abouabra/monitoring.sh
 #<---------------------------->
 
 #<-----configure mariadb ------>
