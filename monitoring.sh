@@ -9,7 +9,7 @@ wall "
         #vCPU           : $(echo $NUMBER_OF_SOCKETS \* $CORE_PER_SOCKET \* $THREADS_PER_CORE | bc)
         #Memory Usage: $(free -m | awk 'NR == 2 {printf("%s/%sMB (%.2f%%)",$3,$2,$3*100/$2)}')
         #Disk Usage: $(df --total -h | awk 'NR == 14 {printf("%d/%dGb (%.2f%%)", $3 * 1024, $2, $3*100/$2)}')
-        #CPU load: $(top -bn1 | tr ',' ' ' | awk 'NR==3 {printf("%.2f%%",100-$8)}')
+        #CPU load: $(top -bn1 | tr ',' ' ' | awk 'NR==3 {printf("%.1f%%",100-$8)}')
         #Last boot: $(who -b | awk '{printf $3 " " $4}')
         #LVM use: $LVM_ANSWER
         #Connexions TCP: $(cat /proc/net/sockstat | awk 'NR==2 {printf $3}') ESTABLISHED
