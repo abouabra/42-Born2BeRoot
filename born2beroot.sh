@@ -89,7 +89,7 @@ cp wp-config-sample.php wp-config.php
 
 sed -i 's/database_name_here/wordpress/' wp-config.php
 sed -i 's/username_here/abouabra/' wp-config.php
-sed -i 's/password_here/1598753246/' wp-config.php
+sed -i 's/password_here/0000/' wp-config.php
 
 #<---------------------------->
 #<-----configure Lighttpd ------>
